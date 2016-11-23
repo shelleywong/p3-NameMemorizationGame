@@ -3,6 +3,7 @@
   <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="style.css"/>
+    <script type="text/javascript" src="flashcards.js"></script>
     <title>Student Name/Face Matcher</title>
   </head>
   <body>
@@ -11,13 +12,26 @@
       <div style="width:5%; float:left">
         &nbsp;
       </div>
-      <div style="width:35%; float:left">
+      <div style="width:50%; float:left">
         <h3 class="headingstyle">See if you can remember the name of each student!</h3>
-
+        <p class="textstyle">Enter first and last name here:</p>
+        <input type="text"></input>
+        <p class="textstyle">Try Again:</p>
+        <button type="button" class="buttonstyle" onclick="reset()">Reset and Try Again!</button>
+        <p>&nbsp;</p>
+        <img src="https://upload.wikimedia.org/wikipedia/en/thumb/3/36/SPClass.jpg/500px-SPClass.jpg"
+          alt="image of 4th graders in classroom" />
+        <p><a class="sourcestyle" href="https://en.wikipedia.org/wiki/List_of_students_at_South_Park_Elementary">
+          Group Image Source</a></p>
+        <p><a class="sourcestyle"
+          href="http://howtonestforless.com/2013/01/04/how-to-make-chalkboard-printables/">
+          Background Image Source</a></p>
       </div>
-      <div style="width:60%; float:left">
-        <p><a class="sourcestyle" href="https://www.pinterest.com/brunasacomandel/artes-e-ideias/">
-            Background Image Source</a></p>
+      <div style="width:40%; float:left">
+        <p>&nbsp;</p>
+        <button type="button" class="buttonstyle" onclick="printAll()">Show me a face</button>
+        <p>&nbsp;</p>
+        <div id="studentimg"></div>
       </div>
     </div>
   </body>
