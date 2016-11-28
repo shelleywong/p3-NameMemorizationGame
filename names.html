@@ -6,29 +6,35 @@
     <script type="text/javascript" src="flashcards.js"></script>
     <title>Student Name/Face Matcher</title>
   </head>
-  <body onload="reset()">
+  <body onload="resetGame()">
     <!--Author: Shelley Wong -->
     <div style="width:100%">
-      <div style="width:5%; float:left">
+      <div style="width:2.5%; float:left">
         &nbsp;
       </div>
-      <div style="width:50%; float:left">
-        <h3 class="headingstyle">See if you can remember the name of each student!</h3>
-        <p class="textstyle">Type in first and last name here (click 'enter' to submit your answer):</p>
+      <div style="width:55%; float:left">
+        <h3 class="headingstyle">You will be shown images of each student
+          in random order. See if you can remember all of their names!</h3>
+        <p class="textstyle">Type first and last name here (click 'return' key to submit):</p>
         <input id="nameinput" type="text" onkeypress="submitNames(event)" size="30"></input>
         <p id="result" class="textstyle"></p>
         <p class="textstyle">Not Sure About This One?
         <button type="button" class="buttonstyle" onclick="pass()">Pass</button></p>
         <p class="textstyle">Try Again:
-        <button type="button" class="buttonstyle" onclick="reset()">Reset</button></p>
+        <button type="button" class="buttonstyle" onclick="resetGame()">Reset</button></p>
         <p>&nbsp;</p>
-        <p><a class="sourcestyle" href="http://southpark.wikia.com/wiki/The_4th_Grade">
-          Student Images Source</a></p>
-        <p><a class="sourcestyle"
+        <p class="textstyle">
+          * <a class="sourcestyle" href="index.html">Return to the Homepage</a>
+          * <a class="sourcestyle" href="http://southpark.wikia.com/wiki/The_4th_Grade">
+            Student Images Source</a>
+          * <a class="sourcestyle"
           href="http://howtonestforless.com/2013/01/04/how-to-make-chalkboard-printables/">
-          Background Image Source</a></p>
+            Background Image Source</a></p>
       </div>
-      <div style="width:40%; float:left">
+      <div style="width:2.5%; float:left">
+        &nbsp;
+      </div>
+      <div style="width:35%; float:left">
         <p>&nbsp;</p>
         <button type="button" class="buttonstyle" onclick="chooseRandom()">Let's Start!</button>
         <p>&nbsp;</p>

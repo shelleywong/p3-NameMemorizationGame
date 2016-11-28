@@ -6,22 +6,48 @@
     <script type="text/javascript" src="flashcards.js"></script>
     <title>Student Name/Face Matcher</title>
   </head>
-  <body>
+  <body onload="resetCards()">
     <!--Author: Shelley Wong -->
     <div style="width:100%">
+      <div style="width:2.5%; float:left">
+        &nbsp;
+      </div>
+      <div style="width:55%; float:left">
+        <h3 class="headingstyle">Practice Time!</h3>
+        <ol class="textstyle">
+          <li>Choose a name from the drop-down list to see the student's picture:</li>
+            <p>
+              <select id="students" onchange="showFace()">
+                <option value=""></option>
+                <option value="eric cartman">Eric Cartman</option>
+                <option value="kenny mccormick">Kenny McCormick</option>
+                <option value="kyle broflovski">Kyle Broflovski</option>
+                <option value="stan marsh">Stan Marsh</option>
+              </select>
+            </p>
+          <li>Or flip through the randomized images to see if you can recall
+            each name (click the image to confirm the name):</li>
+              <p><button type="button" class="buttonstyle" onclick="flip()">Flip!</button></p>
+        </ol>
+        <p class="textstyle">Try Again:</p>
+        <p><button type="button" class="buttonstyle" onclick="resetCards()">Reset</button></p>
+        <p>&nbsp;</p>
+        <p class="textstyle">
+          * <a class="sourcestyle" href="index.html">Return to the Homepage</a>
+          * <a class="sourcestyle" href="http://southpark.wikia.com/wiki/The_4th_Grade">
+            Student Images Source</a>
+          * <a class="sourcestyle"
+          href="http://howtonestforless.com/2013/01/04/how-to-make-chalkboard-printables/">
+            Background Image Source</a></p>
+      </div>
       <div style="width:5%; float:left">
         &nbsp;
       </div>
-      <div style="width:60%; float:left">
-        <p><a class="sourcestyle"
-            href="http://howtonestforless.com/2013/01/04/how-to-make-chalkboard-printables/">
-            Background Image Source</a></p>
-      </div>
       <div style="width:35%; float:left">
-        <h3 class="headingstyle">See if you can remember which face goes with which name!</h3>
-
+        <p>&nbsp;</p>
+        <div id="flashface" class="textstyle" onclick="showName()"></div>
+        <p id="flashname" class="headingstyle"></button>
       </div>
-
     </div>
   </body>
 </html>

@@ -11,6 +11,7 @@ var myStudents = [
 var nameInput = []; //empty array for user's text input of student names
 var index = 0; //global index
 var listNum = 1; //one-based index for the user
+var studentNum;
 
 //grab student at index & increment index
 function chooseRandom(){
@@ -39,7 +40,7 @@ function shuffle(arr){
 }
 
 //call shuffle on the array, reset indexes & nameInput array; clear images from the page
-function reset(){
+function resetGame(){
   myStudents = shuffle(myStudents);
   index = 0;
   listNum = 1;
@@ -49,7 +50,8 @@ function reset(){
   document.getElementById("nameinput").value = "";
 }
 
-//enter user-submitted names to an array (in order entered)
+//enter user-submitted names to an array, then clear the input field for next entry
+//keep selecting a random student until the num of names entered == the num of students
 function submitNames(event){
   if(event.keyCode == 13){
     var input = document.getElementById("nameinput").value;
@@ -84,6 +86,46 @@ function checkNames(){
   }
   document.getElementById("result").innerHTML = "You got " + points + " out of "
     + myStudents.length + " correct!";
+}
+
+//user chooses name from drop-down list and image of that student appears
+function showFace(){
+  var name = document.getElementById("students").value;
+  var out = "";
+  for(var i=0; i<myStudents.length; i++){
+    if(name == myStudents[i].firstname.toLowerCase() + " " +
+      myStudents[i].lastname.toLowerCase()){
+        out += "<img src=\""+myStudents[i].img+"\" width=200>";
+    }
+  }
+  document.getElementById("flashface").innerHTML = out;
+}
+
+//flip flashcard to show student image, assign the student a number based on current location
+function flip(){
+  var image = "";
+  document.getElementById("flashname").innerHTML = "";
+  studentNum = index;
+  image += listNum + "<img src=\""+myStudents[index].img+"\" width=200>";
+  document.getElementById("flashface").innerHTML = image;
+  index++;
+  listNum++;
+}
+
+//if user clicks on flashcard of student's image, show name of that student
+function showName(){
+  var text = "";
+  text = myStudents[studentNum].firstname + " " + myStudents[studentNum].lastname;
+  document.getElementById("flashname").innerHTML = text;
+}
+
+//reshuffle myStudents array and reset rest of practice/flashcards page
+function resetCards(){
+  myStudents = shuffle(myStudents);
+  index = 0;
+  listNum = 1;
+  document.getElementById("students").value = "";
+  document.getElementById("flashface").innerHTML = "";
 }
 
 function printAll(){
