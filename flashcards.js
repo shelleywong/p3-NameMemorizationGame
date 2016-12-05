@@ -90,20 +90,8 @@ function checkNames(){
   numCorrect = getCookie("points");
   var percent = (numCorrect/myStudents.length)*100;
   percent = percent.toFixed(0);
-  document.getElementById("result").innerHTML = "You got " + numCorrect + " out of "
-    + myStudents.length + " correct <br> " + percent + "%";
-  /*
-  var points = 0;
-  for(var i=0; i<myStudents.length; i++){
-    myStudents[i].firstname = myStudents[i].firstname.toLowerCase();
-    myStudents[i].lastname = myStudents[i].lastname.toLowerCase();
-    if(nameInput[i] == myStudents[i].firstname + " " + myStudents[i].lastname){
-      points++;
-    }
-  }
-  document.getElementById("result").innerHTML = "You got " + points + " out of "
-    + myStudents.length + " correct <br> " + (points/myStudents.length)*100;
-    */
+  document.getElementById("result").innerHTML = percent + "% <br> You got " +
+    numCorrect + " out of " + myStudents.length + " correct! <br>";
 }
 
 //user chooses name from drop-down list and image of that student appears
@@ -144,6 +132,7 @@ function resetCards(){
   listNum = 1;
   document.getElementById("students").value = "";
   document.getElementById("flashface").innerHTML = "";
+  document.getElementById("flashname").innerHTML = "";
 }
 
 function printAll(){

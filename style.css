@@ -22,6 +22,12 @@ body{
   font-family: "Century Schoolbook", serif;
 }
 
+.textstyle2{
+  color:#EEEEEE;
+  font-size:25px;
+  font-family: "Century Schoolbook", serif;
+}
+
 .buttonstyle{
   color: #111111;
   background-color: #4444AA;
@@ -35,4 +41,11 @@ body{
   color: #CCCCCC;
   font-size: 14px;
   font-family: Verdana, sans-serif;
+}
+
+.box{
+  border:3px;
+  border-style:groove;
+  padding:20px;
+  color: #FFCC33;
 }
