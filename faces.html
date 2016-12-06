@@ -12,29 +12,31 @@
       <div style="width:2.5%; float:left">
         &nbsp;
       </div>
-      <div style="width:55%; float:left">
+      <div style="width:60%; float:left">
         <h3 class="headingstyle">Practice Time!</h3>
         <ol class="textstyle">
-          <li>Choose a name from the drop-down list to see the student's picture:</li>
+          <li>Choose a name from the drop-down list to see the student's picture:
             <p>
               <select id="students" onchange="showFace()">
-                <option value=""></option>
+                <option value="">Select name...</option>
                 <option value="eric cartman">Eric Cartman</option>
                 <option value="kenny mccormick">Kenny McCormick</option>
                 <option value="kyle broflovski">Kyle Broflovski</option>
                 <option value="stan marsh">Stan Marsh</option>
               </select>
             </p>
+          </li>
           <li>Or flip through the randomized images to see if you can recall
-            each name (click the image to confirm the name):</li>
+            each name (click the image to confirm the name):
               <p><button type="button" class="buttonstyle" onclick="flip()">Flip!</button></p>
+          </li>
         </ol>
         <p>&nbsp;</p>
         <p class="textstyle">
             Try Again: <button type="button" class="buttonstyle"
               onclick="resetCards()">Reset</button>&nbsp;
             Ready to Play: <button type="button" class="buttonstyle"
-              onclick="nextPage('names.html')">Name Game</button></p>
+              onclick="nextPage('names.html')">NAME GAME</button></p>
         <p>&nbsp;</p>
         <p class="textstyle">
           * <a class="sourcestyle" href="index.html">Return to the Homepage</a>
@@ -47,10 +49,10 @@
       <div style="width:5%; float:left">
         &nbsp;
       </div>
-      <div style="width:35%; float:left">
+      <div style="width:30%; float:left">
         <p>&nbsp;</p>
         <div id="flashface" class="textstyle" onclick="showName()"></div>
-        <p id="flashname" class="headingstyle"></button>
+        <p id="flashname" class="headingstyle"></p>
       </div>
     </div>
   </body>
