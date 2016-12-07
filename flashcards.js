@@ -118,21 +118,25 @@ function submitNames(event){
     //if user chose first name only (else, user chose full name)
     //if user answers correctly, increase numCorrect & adjust "points" cookie
     var choice = document.getElementById("nameoption").value;
-    if(choice == "First Name Only"){
-      setCookie("thisGame",choice,1);
-      if(nameInput[current] == myStudents[current].firstname.toLowerCase()){
-            numCorrect += 1;
+    setCookie("thisGame",choice,1);
+    if(choice == "First Name Only")
+    {
+      if(nameInput[current] == myStudents[current].firstname.toLowerCase())
+      {
+          numCorrect += 1;
       }
       setCookie("points",numCorrect,1);
     }
-    else{
-      setCookie("thisGame",choice,1);
-      if(nameInput[current] == myStudents[current].firstname.toLowerCase() + " "
-          + myStudents[current].lastname.toLowerCase()){
-            numCorrect += 1;
+    else
+    {
+      if(nameInput[current] == myStudents[current].firstname.toLowerCase() +
+        " " + myStudents[current].lastname.toLowerCase())
+      {
+          numCorrect += 1;
       }
       else if(nameInput[current] == myStudents[current].firstname.toLowerCase()
-        && myStudents[current].lastname == ""){
+        && myStudents[current].lastname == "")
+      {
           numCorrect += 1;
       }
       setCookie("points",numCorrect,1);
@@ -199,11 +203,17 @@ function checkNames(){
     numCorrect + " out of " + myStudents.length + " correct! <br>";
   //extra note if user chose to try learning full names
   var game = getCookie("thisGame");
-  if(game == "Full Name"){
-    document.getElementById("extranote").innerHTML = 'Last names, too?! Sweet. ' +
-      '<img src="http://www.southparkwillie.com/SPinfo/AnimeClass.jpg" width=400>';
-    document.getElementById("extrasource").innerHTML = '<a class="sourcestyle"' +
-    'href="http://www.southparkwillie.com/SPinfo/SPWeird.htm">' +
+  if(game == "First Name Only"){
+    document.getElementById("extranote").innerHTML = '&#9787; Your students ' +
+      'respect your authority and thank you for trying &#9787;';
+  }
+  else{
+    document.getElementById("extranote").innerHTML =
+      'Last names, too?! Wow, what a great professor!' +
+      '<img src="http://www.southparkwillie.com/SPinfo/AnimeClass.jpg" ' +
+      'style="width:100%">';
+    document.getElementById("extrasource").innerHTML = '<a class="sourcestyle"'
+      + 'href="http://www.southparkwillie.com/SPinfo/SPWeird.htm">' +
       'Anime Expressions Image Source</a>';
   }
 }
