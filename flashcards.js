@@ -1,11 +1,34 @@
 /*  Author: Shelley Wong    */
 
 var myStudents = [
-  { firstname: "Eric", lastname:"Cartman", img:"http://vignette3.wikia.nocookie.net/southpark/images/9/9e/Eric_cartman.png" },
-  { firstname: "Kenny", lastname: "McCormick", img:"http://vignette2.wikia.nocookie.net/southpark/images/6/6f/KennyMcCormick.png"},
-  { firstname: "Kyle", lastname:"Broflovski", img:"http://vignette1.wikia.nocookie.net/southpark/images/7/70/165px-KyleBroflovski.png" },
-  { firstname: "Stan", lastname:"Marsh", img:"http://vignette2.wikia.nocookie.net/southpark/images/a/a7/StanMarsh.png" }
-
+  { firstname: "Annie", lastname: "Faulk",
+    img:"http://vignette1.wikia.nocookie.net/southpark/images/0/01/Annie.png"},
+  { firstname: "Bebe", lastname: "Stevens",
+    img:"http://vignette2.wikia.nocookie.net/southpark/images/2/2b/2-436.png"},
+  { firstname: "Butters", lastname: "Stotch",
+    img:"http://vignette4.wikia.nocookie.net/southpark/images/0/06/ButtersStotch.png"},
+  { firstname: "Clyde", lastname: "Donovan",
+    img:"http://vignette1.wikia.nocookie.net/southpark/images/9/9e/Clyde_d.png"},
+  { firstname:"Craig", lastname: "Tucker",
+    img:"http://vignette2.wikia.nocookie.net/southpark/images/7/77/Craig.svg"},
+  { firstname: "Eric", lastname: "Cartman",
+    img:"http://vignette3.wikia.nocookie.net/southpark/images/9/9e/Eric_cartman.png"},
+  { firstname: "Jimmy", lastname: "Valmer",
+    img:"http://vignette4.wikia.nocookie.net/southpark/images/2/24/Jimmy_h-h-here.png"},
+  { firstname: "Kenny", lastname: "McCormick",
+    img:"http://vignette2.wikia.nocookie.net/southpark/images/6/6f/KennyMcCormick.png"},
+  { firstname: "Kyle", lastname: "Broflovski",
+    img:"http://vignette1.wikia.nocookie.net/southpark/images/7/70/165px-KyleBroflovski.png"},
+  { firstname: "Red", lastname: "",
+    img:"http://vignette3.wikia.nocookie.net/southpark/images/1/12/Red_pic2.png"},
+  { firstname: "Stan", lastname: "Marsh",
+    img:"http://vignette2.wikia.nocookie.net/southpark/images/a/a7/StanMarsh.png"},
+  { firstname: "Timmy", lastname: "Burch",
+    img:"http://vignette1.wikia.nocookie.net/southpark/images/4/4b/Timmy.png"},
+  { firstname: "Token", lastname: "Black",
+    img:"http://vignette2.wikia.nocookie.net/southpark/images/d/d3/Token_Black2.png"},
+  { firstname: "Wendy", lastname: "Testaburger",
+    img:"http://vignette3.wikia.nocookie.net/southpark/images/9/9e/Wendyy.png"}
 ];
 
 var nameInput = []; //empty array for user's text input of student names
@@ -36,11 +59,15 @@ function showFace(){
     if(name == myStudents[i].firstname + " " + myStudents[i].lastname){
         out += "<img src=\""+myStudents[i].img+"\" width=200>";
     }
+    else if(name == myStudents[i].firstname && myStudents[i].lastname == ""){
+      out += "<img src=\""+myStudents[i].img+"\" width=200>";
+    }
   }
   document.getElementById("flashface").innerHTML = out;
 }
 
-//flip flashcard to show student image, assign the student a number based on current location
+//flip flashcard to show student image
+//assign the student a number based on current location
 function flip(){
   var image = "";
   document.getElementById("flashname").innerHTML = "";
@@ -79,7 +106,8 @@ function chooseRandom(){
   listNum++;
 }
 
-//enter user-submitted names to an array, then clear the input field for next entry
+//enter user-submitted names to an array
+//then clear the input field for next entry
 function submitNames(event){
   if(event.keyCode == 13){
     var input = document.getElementById("nameinput").value;
@@ -88,18 +116,24 @@ function submitNames(event){
     console.log(nameInput);
     document.getElementById("nameinput").value = "";
     //if user chose first name only (else, user chose full name)
-    //if user answers correctly, increase numCorrect by 1 and adjust the "points" cookie
+    //if user answers correctly, increase numCorrect & adjust "points" cookie
     var choice = document.getElementById("nameoption").value;
     if(choice == "First Name Only"){
+      setCookie("thisGame",choice,1);
       if(nameInput[current] == myStudents[current].firstname.toLowerCase()){
             numCorrect += 1;
       }
       setCookie("points",numCorrect,1);
     }
     else{
-      if(nameInput[current] == myStudents[current].firstname.toLowerCase() + " " +
-          myStudents[current].lastname.toLowerCase()){
+      setCookie("thisGame",choice,1);
+      if(nameInput[current] == myStudents[current].firstname.toLowerCase() + " "
+          + myStudents[current].lastname.toLowerCase()){
             numCorrect += 1;
+      }
+      else if(nameInput[current] == myStudents[current].firstname.toLowerCase()
+        && myStudents[current].lastname == ""){
+          numCorrect += 1;
       }
       setCookie("points",numCorrect,1);
     }
@@ -117,10 +151,16 @@ function submitNames(event){
 //if user doesn't know a name, skip entering value this time
 function pass(){
   nameInput.push("");
-  chooseRandom();
+  if(nameInput.length == myStudents.length){
+    nextPage('results.html');
+  }
+  else{
+    chooseRandom();
+  }
 }
 
-//call shuffle on the array, reset indexes & nameInput array; clear images from the page
+//call shuffle on the array, reset indexes & nameInput array
+//set numCorrect back to 0, clear images & other results from the page
 function resetGame(){
   myStudents = shuffle(myStudents);
   index = 0;
@@ -157,6 +197,15 @@ function checkNames(){
   percent = percent.toFixed(0);
   document.getElementById("result").innerHTML = percent + "% <br> You got " +
     numCorrect + " out of " + myStudents.length + " correct! <br>";
+  //extra note if user chose to try learning full names
+  var game = getCookie("thisGame");
+  if(game == "Full Name"){
+    document.getElementById("extranote").innerHTML = 'Last names, too?! Sweet. ' +
+      '<img src="http://www.southparkwillie.com/SPinfo/AnimeClass.jpg" width=400>';
+    document.getElementById("extrasource").innerHTML = '<a class="sourcestyle"' +
+    'href="http://www.southparkwillie.com/SPinfo/SPWeird.htm">' +
+      'Anime Expressions Image Source</a>';
+  }
 }
 
 function nextPage(page){

@@ -15,16 +15,19 @@
       <div style="width:60%; float:left">
         <h3 class="headingstyle">Practice Time!</h3>
         <ol class="textstyle">
-          <li>Choose a name from the drop-down list to see the student's picture:
+          <li>Choose name from the drop-down list to see student's picture:
             <p>
-              <select id="students" class="menustyle" onchange="showFace()">
+              <select id="students" class="userstyle" onchange="showFace()">
                 <option value="">Select name...</option>
               </select>
             </p>
           </li>
           <li>Or flip through the randomized images to see if you can recall
-            each name (click the image to confirm the name):
-              <p><button type="button" class="buttonstyle" onclick="flip()">Flip!</button></p>
+              each name (click the image to confirm the name):
+              <p>
+                <button type="button" class="buttonstyle" onclick="flip()">
+                Flip!</button>
+              </p>
           </li>
         </ol>
         <p>&nbsp;</p>
@@ -32,7 +35,8 @@
             Try Again: <button type="button" class="buttonstyle"
               onclick="resetCards()">Reset</button>&nbsp;
             Ready to Play: <button type="button" class="buttonstyle"
-              onclick="nextPage('names.html')">NAME GAME</button></p>
+              onclick="nextPage('names.html')">NAME GAME</button>
+        </p>
         <p>&nbsp;</p>
         <p class="textstyle">
           * <a class="sourcestyle" href="index.html">Return to the Homepage</a>

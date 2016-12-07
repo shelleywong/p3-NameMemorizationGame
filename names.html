@@ -21,16 +21,21 @@
           </div>
         </div>
         <p class="textstyle">First choose option below:</p>
-        <select id="nameoption" class="menustyle" onchange="chooseGame()">
+        <select id="nameoption" class="userstyle" onchange="chooseGame()">
           <option>First Name Only</option>
           <option>Full Name</option>
         </select>
         <p class="textstyle">Type name here (click 'return' key to submit):</p>
-        <input id="nameinput" type="text" onkeypress="submitNames(event)" size="30"/>
+        <input id="nameinput" type="text" class="userstyle"
+          onkeypress="submitNames(event)" size="30"/>
         <p class="textstyle">Not Sure About This One?
-        <button type="button" class="buttonstyle" onclick="pass()">Pass</button></p>
+          <button type="button" class="buttonstyle" onclick="pass()">
+            Pass</button>
+        </p>
         <p class="textstyle">Try Again:
-        <button type="button" class="buttonstyle" onclick="resetGame()">Reset</button></p>
+          <button type="button" class="buttonstyle" onclick="resetGame()">
+            Reset</button>
+        </p>
         <p>&nbsp;</p>
         <p class="textstyle">
           * <a class="sourcestyle" href="index.html">Return to the Homepage</a>
