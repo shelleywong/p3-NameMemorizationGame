@@ -1,4 +1,4 @@
-//Author: Shelley Wong
+/*  Author: Shelley Wong    */
 
 var myStudents = [
   { firstname: "Eric", lastname:"Cartman", img:"http://vignette3.wikia.nocookie.net/southpark/images/9/9e/Eric_cartman.png" },
@@ -17,15 +17,23 @@ var studentNum;
 //in Name Game, keep track of cur index, use to compare submitted name with actual
 var current;
 
-/*  Functions for flashcard/practice page (faces.html)  */
+//adapted from w3schools: http://www.w3schools.com/jsref/met_select_add.asp
+function fillDropDown(){
+  for(var i=0; i<myStudents.length; i++){
+    var item = document.getElementById("students");
+    var option = document.createElement("option");
+    option.text = myStudents[i].firstname + " " + myStudents[i].lastname;
+    item.add(option);
+  }
+}
 
+/*  Functions for flashcard/practice page (faces.html)  */
 //user chooses name from drop-down list and image of that student appears
 function showFace(){
   var name = document.getElementById("students").value;
   var out = "";
   for(var i=0; i<myStudents.length; i++){
-    if(name == myStudents[i].firstname.toLowerCase() + " " +
-      myStudents[i].lastname.toLowerCase()){
+    if(name == myStudents[i].firstname + " " + myStudents[i].lastname){
         out += "<img src=\""+myStudents[i].img+"\" width=200>";
     }
   }
@@ -61,6 +69,15 @@ function resetCards(){
 }
 
 /*  Functions for Name Game page (names.html) */
+//grab student at index & increment index
+function chooseRandom(){
+  var image = "";
+  current = index;
+  image += listNum + "<img src=\""+myStudents[index].img+"\" width=200>";
+  document.getElementById("studentimg").innerHTML = image;
+  index++;
+  listNum++;
+}
 
 //enter user-submitted names to an array, then clear the input field for next entry
 function submitNames(event){
@@ -70,12 +87,22 @@ function submitNames(event){
     nameInput.push(input);
     console.log(nameInput);
     document.getElementById("nameinput").value = "";
+    //if user chose first name only (else, user chose full name)
     //if user answers correctly, increase numCorrect by 1 and adjust the "points" cookie
-    if(nameInput[current] == myStudents[current].firstname.toLowerCase() + " " +
-        myStudents[current].lastname.toLowerCase()){
-          numCorrect += 1;
+    var choice = document.getElementById("nameoption").value;
+    if(choice == "First Name Only"){
+      if(nameInput[current] == myStudents[current].firstname.toLowerCase()){
+            numCorrect += 1;
+      }
+      setCookie("points",numCorrect,1);
     }
-    setCookie("points",numCorrect,1);
+    else{
+      if(nameInput[current] == myStudents[current].firstname.toLowerCase() + " " +
+          myStudents[current].lastname.toLowerCase()){
+            numCorrect += 1;
+      }
+      setCookie("points",numCorrect,1);
+    }
     //keep selecting a random student until the num of names entered is the same
     //as the num of students. Then go to the results page to check final score
     if(nameInput.length == myStudents.length){
@@ -91,16 +118,6 @@ function submitNames(event){
 function pass(){
   nameInput.push("");
   chooseRandom();
-}
-
-//grab student at index & increment index
-function chooseRandom(){
-  var image = "";
-  current = index;
-  image += listNum + "<img src=\""+myStudents[index].img+"\" width=200>";
-  document.getElementById("studentimg").innerHTML = image;
-  index++;
-  listNum++;
 }
 
 //call shuffle on the array, reset indexes & nameInput array; clear images from the page
@@ -120,7 +137,7 @@ function shuffle(arr){
   var curIndex = arr.length;
   var temp;
   var randomIndex;
-  //keeping choosing random index while there are still elements to shuffle
+  //keep choosing random index while there are still elements to shuffle
   while(curIndex > 0){
     randomIndex = Math.floor(Math.random()*curIndex);
     curIndex--;

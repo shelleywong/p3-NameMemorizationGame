@@ -6,7 +6,7 @@
     <script type="text/javascript" src="flashcards.js"></script>
     <title>Student Name/Face Matcher</title>
   </head>
-  <body onload="resetCards()">
+  <body onload="resetCards(); fillDropDown()">
     <!--Author: Shelley Wong -->
     <div style="width:100%">
       <div style="width:2.5%; float:left">
@@ -17,12 +17,8 @@
         <ol class="textstyle">
           <li>Choose a name from the drop-down list to see the student's picture:
             <p>
-              <select id="students" onchange="showFace()">
+              <select id="students" class="menustyle" onchange="showFace()">
                 <option value="">Select name...</option>
-                <option value="eric cartman">Eric Cartman</option>
-                <option value="kenny mccormick">Kenny McCormick</option>
-                <option value="kyle broflovski">Kyle Broflovski</option>
-                <option value="stan marsh">Stan Marsh</option>
               </select>
             </p>
           </li>
