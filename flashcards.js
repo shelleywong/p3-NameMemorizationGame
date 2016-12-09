@@ -32,6 +32,7 @@ var myStudents = [
 ];
 
 var nameInput = []; //empty array for user's text input of student names
+var curScore = []; //empty array to hold current right/wrong answers in Name Game
 var index = 0; //global index
 var listNum = 1; //one-based index for the user
 var numCorrect = 0; //num of correct guesses in Name Game
@@ -117,6 +118,7 @@ function submitNames(event){
     document.getElementById("nameinput").value = "";
     //if user chose first name only (else, user chose full name)
     //if user answers correctly, increase numCorrect & adjust "points" cookie
+    //output msg: cur points & arr of checkmarks (correct) or 'X' marks (incorrect)
     var choice = document.getElementById("nameoption").value;
     setCookie("thisGame",choice,1);
     if(choice == "First Name Only")
@@ -124,7 +126,14 @@ function submitNames(event){
       if(nameInput[current] == myStudents[current].firstname.toLowerCase())
       {
           numCorrect += 1;
+          curScore.push("&#10004;");
       }
+      else
+      {
+        curScore.push("&#10006;");
+      }
+      document.getElementById("checker").innerHTML = "Your Current Point Total: "
+        + numCorrect + "<br>" + curScore.join(" ");
       setCookie("points",numCorrect,1);
     }
     else
@@ -133,13 +142,21 @@ function submitNames(event){
         " " + myStudents[current].lastname.toLowerCase())
       {
           numCorrect += 1;
+          curScore.push("&#10004;");
       }
       else if(nameInput[current] == myStudents[current].firstname.toLowerCase()
         && myStudents[current].lastname == "")
       {
           numCorrect += 1;
+          curScore.push("&#10004;");
+      }
+      else
+      {
+        curScore.push("&#10006;");
       }
       setCookie("points",numCorrect,1);
+      document.getElementById("checker").innerHTML = "Your Current Point Total: "
+        + numCorrect + "<br>" + curScore.join(" ");
     }
     //keep selecting a random student until the num of names entered is the same
     //as the num of students. Then go to the results page to check final score
@@ -155,6 +172,9 @@ function submitNames(event){
 //if user doesn't know a name, skip entering value this time
 function pass(){
   nameInput.push("");
+  curScore.push("&#10006;");
+  document.getElementById("checker").innerHTML = "Your Current Point Total: " +
+    numCorrect + "<br>" + curScore.join(" ");
   if(nameInput.length == myStudents.length){
     nextPage('results.html');
   }
@@ -171,7 +191,9 @@ function resetGame(){
   listNum = 1;
   numCorrect = 0;
   nameInput = [];
+  curScore = [];
   document.getElementById("studentimg").innerHTML = "";
+  document.getElementById("checker").innerHTML = "";
   document.getElementById("result").innerHTML = "";
   document.getElementById("nameinput").value = "";
 }
